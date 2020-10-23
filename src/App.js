@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
 import './App.css';
+import styled from 'styled-components'
+import ItemTile from './Components/ItemTile'
+
 
 function App() {
+
+  let [data, setData] = useState({})
+
+  useEffect(() => {
+    fetch('http://localhost:3000/menu_item', {
+      method: 'get',
+      mode: 'cors',
+      headers: {
+          'Content-Type': 'application/json',
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setData(data)
+      });
+  }, []);
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header>
+        <span className="headerOption">Home</span>
+        <span className="headerOption">Menu</span>
+        <span className="headerOption">Contact</span>
+        <span className="headerOption"></span>
+      </Header>
+
+      {/* { console.log(data) } */}
+      { Object.keys(data).length > 0
+      ? (data.map(menuItem => {
+          if(menuItem.name){
+            return <ItemTile name={menuItem.name} description={menuItem.description} price={menuItem.price}></ItemTile>
+          }
+         }))
+
+      : <div></div>
+    }
     </div>
   );
 }
 
+const Header = styled.div`
+  background-color: blue;
+  color: white;
+
+  .headerOption {
+    margin: 3rem;
+  }
+`
+
+
 export default App;
+// 
