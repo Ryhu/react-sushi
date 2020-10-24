@@ -6,7 +6,7 @@ function ItemTile(props) {
 
   return (
     <ItemTileContainer>
-      <div class="container">
+      <div className="container">
         <div>
           <p className="text bold" >{ props.name }</p>
           <p className="text" >{ props.description }</p>

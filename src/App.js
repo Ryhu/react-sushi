@@ -6,7 +6,7 @@ import ItemTile from './Components/ItemTile'
 
 function App() {
 
-  let [data, setData] = useState({})
+  let [data, setData] = useState([])
 
   useEffect(() => {
     fetch('http://localhost:3000/menu_item', {
@@ -18,8 +18,8 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data)
-        setData(data)
+        console.log(data.data)
+        setData(data.data)
       });
   }, []);
 
@@ -34,19 +34,38 @@ function App() {
         <span className="headerOption"></span>
       </Header>
 
-      {/* { console.log(data) } */}
-      { Object.keys(data).length > 0
-      ? (data.map(menuItem => {
-          if(menuItem.name){
-            return <ItemTile name={menuItem.name} description={menuItem.description} price={menuItem.price}></ItemTile>
+      { (data.length > 0)
+        ? (data.map(menuItem => {
+          if(menuItem.attributes.name){
+            return <ItemTile 
+                      name={menuItem.attributes.name} 
+                      description={menuItem.attributes.description} 
+                      price={menuItem.attributes.price}
+                      key={menuItem.attributes.id}>
+                    </ItemTile>
           }
-         }))
-
-      : <div></div>
-    }
+        }))
+        : <div></div>
+      }
     </div>
   );
 }
+
+
+
+
+
+// { Object.keys(data).length > 0
+//   ? (data.map(menuItem => {
+//       if(menuItem.name){
+//         return <ItemTile name={menuItem.name} description={menuItem.description} price={menuItem.price}></ItemTile>
+//       }
+//      }))
+
+//   : <div></div>
+// }
+
+
 
 const Header = styled.div`
   background-color: blue;
