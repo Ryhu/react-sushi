@@ -6,26 +6,37 @@ function ItemTile(props) {
 
   return (
     <ItemTileContainer>
-      <p className="text" >{ props.name }</p>
-      <p className="text" >{ props.description }</p>
-      <p className="text" >{ '$' + props.price }</p>
+      <div class="container">
+        <div>
+          <p className="text bold" >{ props.name }</p>
+          <p className="text" >{ props.description }</p>
+        </div>
+        <p className="text bold" >{ '$' + props.price }</p>
+      </div>
     </ItemTileContainer>
   );
 }
 
 const ItemTileContainer = styled.div`
-  background-color: red;
-  padding: .5rem;
-  color: white;
-  height: 7rem;
-  width: 23rem;
-  border: 0.6px solid black;
   display: inline-block;
-  text-align: left;
-  vertical-align: top;
+  margin: 1rem;
 
-  .text {
-    margin: 0.5rem;
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 23rem;
+    border: 0.6px solid black;
+    text-align: left;
+    vertical-align: top;
+
+    .text {
+      margin: 1rem;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
   }
 `
 
