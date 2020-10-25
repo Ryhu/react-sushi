@@ -2,11 +2,12 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import styled from 'styled-components'
 import ItemTile from './Components/ItemTile'
+import MenuCategory from './Components/MenuCategory'
 
 
 function App() {
 
-  let [data, setData] = useState([])
+  let [data, setData] = useState({})
 
   useEffect(() => {
     fetch('http://localhost:3000/menu_item', {
@@ -18,12 +19,18 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data.data)
-        setData(data.data)
+        let categories = {}
+
+        data.data.forEach(menuItem => {
+          if (categories[menuItem.attributes.category]){
+            categories[menuItem.attributes.category] = categories[menuItem.attributes.category].concat(menuItem)
+          } else {
+            categories[menuItem.attributes.category] = [menuItem]
+          }
+        })
+        setData(categories)
       });
   }, []);
-
-
 
   return (
     <div className="App">
@@ -34,19 +41,18 @@ function App() {
         <span className="headerOption"></span>
       </Header>
 
-      { (data.length > 0)
-        ? (data.map(menuItem => {
-          if(menuItem.attributes.name){
-            return <ItemTile 
-                      name={menuItem.attributes.name} 
-                      description={menuItem.attributes.description} 
-                      price={menuItem.attributes.price}
-                      key={menuItem.attributes.id}>
-                    </ItemTile>
-          }
-        }))
-        : <div></div>
-      }
+      <Body>
+        {console.log(data)}
+        {
+          Object.keys(data).length > 1 &&
+            Object.keys(data).map(key => {
+              return <MenuCategory data={data[key]} name={key}></MenuCategory>
+            })
+        }
+
+      </Body>
+
+      {/* <MenuCategory data={data}></MenuCategory> */}
     </div>
   );
 }
@@ -74,6 +80,12 @@ const Header = styled.div`
   .headerOption {
     margin: 3rem;
   }
+`
+
+const Body = styled.div`
+  width: 80vw;
+  text-align: center;
+  margin: auto;
 `
 
 
