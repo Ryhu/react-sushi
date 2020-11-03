@@ -41,6 +41,12 @@ function App() {
         <span className="headerOption"></span>
       </Header>
 
+      <SideNav>
+        <a class="sideNavButton" href={"#menuCategory" + 'Nigiri'}>
+          Nigiri
+        </a>
+      </SideNav>
+
       <Body>
         {console.log(data)}
         {
@@ -80,6 +86,23 @@ const Header = styled.div`
   .headerOption {
     margin: 3rem;
   }
+`
+
+const SideNav = styled.div`
+  position: fixed;
+  height: 100%;
+  top: 50%;
+
+  .sideNavButton {
+    height: 2rem;
+    padding: 0.5rem;
+    background-color: grey;
+    color: white;
+    text-decoration: none;
+    border-radius: 0 1rem 1rem 0;
+  }
+
+
 `
 
 const Body = styled.div`
