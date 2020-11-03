@@ -11,7 +11,6 @@ function MenuCategory(props) {
     <div id={"menuCategory" + props.name}>
       <MenuCategoryContainer>
         <p className="categoryTitle" >{props.name}</p>
-        <a href={"#menuCategory" + props.name}>linky link</a>
         { (props.data.map(menuItem => {
               return <ItemTile 
                         name={menuItem.attributes.name} 

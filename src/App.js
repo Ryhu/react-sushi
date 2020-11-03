@@ -42,9 +42,14 @@ function App() {
       </Header>
 
       <SideNav>
-        <a class="sideNavButton" href={"#menuCategory" + 'Nigiri'}>
-          Nigiri
-        </a>
+        {
+          Object.keys(data).length > 1 &&
+            Object.keys(data).map(key => {
+              return <a class="sideNavButton" href={"#menuCategory" + key}>
+                { key }
+              </a>
+            })
+        }
       </SideNav>
 
       <Body>
@@ -90,16 +95,25 @@ const Header = styled.div`
 
 const SideNav = styled.div`
   position: fixed;
-  height: 100%;
   top: 50%;
+  transform: translate(0, -50%);
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s;
 
   .sideNavButton {
-    height: 2rem;
     padding: 0.5rem;
     background-color: grey;
     color: white;
     text-decoration: none;
     border-radius: 0 1rem 1rem 0;
+    margin: 0.2rem;
+    margin-left: 0;
+    :hover{
+      color:white;
+      background-color: blue;
+      transition: 0.5s;
+    }
   }
 
 
