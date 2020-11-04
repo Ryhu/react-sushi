@@ -6,17 +6,16 @@ function MenuCategory(props) {
   // data = [{menuitems}]
   // name = string
 
-
   return (
     <div id={"menuCategory" + props.name}>
       <MenuCategoryContainer>
         <p className="categoryTitle" >{props.name}</p>
         { (props.data.map(menuItem => {
               return <ItemTile 
-                        name={menuItem.attributes.name} 
-                        description={menuItem.attributes.description} 
-                        price={menuItem.attributes.price}
-                        key={menuItem.attributes.id}>
+                        data={menuItem}
+                        key={menuItem.attributes.id}
+                        addToCart={props.addToCart}
+                        setItemModalData={props.setItemModalData}>
                       </ItemTile>
         })) }
       </MenuCategoryContainer>
@@ -30,6 +29,5 @@ const MenuCategoryContainer = styled.div`
     font-weight: bold;
   }
 `
-
 
 export default MenuCategory;

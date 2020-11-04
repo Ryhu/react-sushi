@@ -5,13 +5,13 @@ import styled from 'styled-components'
 function ItemTile(props) {
 
   return (
-    <ItemTileContainer>
+    <ItemTileContainer onClick={() => props.setItemModalData(props.data)}>
       <div className="container">
         <div>
-          <p className="text bold" >{ props.name }</p>
-          <p className="text" >{ props.description }</p>
+          <p className="text bold" >{ props.data.attributes.name }</p>
+          <p className="text" >{ props.data.attributes.description }</p>
         </div>
-        <p className="text bold" >{ '$' + props.price.toFixed(2) }</p>
+        <p className="text bold" >{ '$' + props.data.attributes.price.toFixed(2) }</p>
       </div>
     </ItemTileContainer>
   );

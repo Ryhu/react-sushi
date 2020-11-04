@@ -1,13 +1,28 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import styled from 'styled-components'
-import ItemTile from './Components/ItemTile'
 import MenuCategory from './Components/MenuCategory'
+import MenuItemModal from './Components/MenuItemModal'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
 
-  let [data, setData] = useState({})
+  const [data, setData] = useState({})
+  const [show, setShow] = useState(false);
+  const [itemModalData, setItemModalData] = useState(null);
+  const [cart, setCart] = useState([])
+
+  const handleClose = () => setShow(false);
+  const handleShow = (menuItemData) => {
+    setShow(true)
+    setItemModalData(menuItemData)
+  };
+
+  const addToCart = (dataAndQuantity) => {
+    setCart(cart.concat([dataAndQuantity]))
+    handleClose()
+  }
 
   useEffect(() => {
     fetch('http://localhost:3000/menu_item', {
@@ -45,25 +60,26 @@ function App() {
         {
           Object.keys(data).length > 1 &&
             Object.keys(data).map(key => {
-              return <a class="sideNavButton" href={"#menuCategory" + key}>
+              return <a className="sideNavButton" href={"#menuCategory" + key} key={key}>
                 { key }
               </a>
             })
         }
       </SideNav>
 
+      { itemModalData && 
+        <MenuItemModal data={itemModalData} show={show} handleClose={handleClose} addToCart={addToCart}></MenuItemModal> }
+
       <Body>
-        {console.log(data)}
         {
           Object.keys(data).length > 1 &&
             Object.keys(data).map(key => {
-              return <MenuCategory data={data[key]} name={key}></MenuCategory>
+              return <MenuCategory data={data[key]} name={key} setItemModalData={handleShow} addToCart={addToCart} key={key} ></MenuCategory>
             })
         }
-
-      </Body>
-
       {/* <MenuCategory data={data}></MenuCategory> */}
+      </Body>
+      <button onClick={() => console.log(cart)}>debugger!</button>
     </div>
   );
 }
