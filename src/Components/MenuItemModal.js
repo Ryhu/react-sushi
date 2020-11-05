@@ -21,6 +21,7 @@ function MenuItemModal(props) {
       onHide={resetModal}
       backdrop="static"
       keyboard={false}
+      centered
     >
       <ModalHeader>
         <div>
@@ -43,11 +44,11 @@ function MenuItemModal(props) {
       </ModalBody>
 
       <Modal.Footer>
-        <button variant="primary" onClick={() => {
+        <AddToCart variant="primary" onClick={() => {
           props.addToCart([props.data, quantity])
           resetModal()
-        }}> Add to Cart </button>
-        <button variant="secondary" onClick={resetModal}> Close </button>
+        }}> Add to Cart </AddToCart>
+        <CloseModal variant="secondary" onClick={resetModal}> Close </CloseModal>
       </Modal.Footer>
     </Modal>
   );
@@ -91,12 +92,12 @@ const ModalBody = styled.div`
 
     .increase{
       background-color: #5cd65c;
-      border-radius:  .5rem 2rem 2rem .5rem;
+      border-radius:  .5rem 1rem 1rem .5rem;
     }
 
     .decrease{
       background-color: #ff5c33;
-      border-radius:  2rem .5rem .5rem 2rem;
+      border-radius:  1rem .5rem .5rem 1rem;
     }
 
     p{
@@ -109,6 +110,22 @@ const ModalBody = styled.div`
       margin: 0 .3rem 0 .3rem;
     }
   }
+`
+
+const AddToCart = styled.span`
+  padding: .5rem .8rem .5rem .8rem;
+  border-radius: .5rem;
+  text-align: center;
+  font-weight: 500;
+  background-color: #5cd65c;
+`
+
+const CloseModal = styled.span`
+  padding: .5rem .8rem .5rem .8rem;
+  border-radius: .5rem;
+  text-align: center;
+  font-weight: 500;
+  background-color: #ff5c33;
 `
 
 const MenuItemModalContainer = styled.div`
