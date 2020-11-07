@@ -41,6 +41,11 @@ function MenuItemModal(props) {
           <span className="increase" onClick={increaseQuantity} >+</span>
           <p>{'$' + (props.data.attributes.price * quantity).toFixed(2)}</p>
         </div>
+
+        <div className="specialInstructions">
+          <p> Special instructions </p>
+          <textarea></textarea>
+        </div>
       </ModalBody>
 
       <Modal.Footer>
@@ -108,6 +113,20 @@ const ModalBody = styled.div`
       width: 2.5rem;
       text-align: center;
       margin: 0 .3rem 0 .3rem;
+    }
+  }
+
+  .specialInstructions{
+    margin-top: 2rem;
+    p{
+      font-weight: 500;
+    }
+
+    textarea{
+      width: 100%;
+      border-radius: .5rem;
+      outline: none;
+      padding: .5rem;
     }
   }
 `
