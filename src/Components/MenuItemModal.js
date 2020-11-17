@@ -35,26 +35,27 @@ function MenuItemModal(props) {
 
       <ModalBody>
         <p>{props.data.attributes.description}</p>
-        <div className="quantityContainer noselect">
-          <span className="decrease" onClick={decreaseQuantity} >-</span>
-          <input className="quantity" type='number' value={quantity} onChange={(e) => setQuantity(e.target.value)}></input>
-          <span className="increase" onClick={increaseQuantity} >+</span>
-          <p>{'$' + (props.data.attributes.price * quantity).toFixed(2)}</p>
-        </div>
-
         <div className="specialInstructions">
           <p> Special instructions </p>
           <textarea></textarea>
         </div>
       </ModalBody>
 
-      <Modal.Footer>
-        <AddToCart variant="primary" onClick={() => {
-          props.addToCart([props.data, quantity])
-          resetModal()
-        }}> Add to Cart </AddToCart>
-        <CloseModal variant="secondary" onClick={resetModal}> Close </CloseModal>
-      </Modal.Footer>
+      <ModalFooter>
+        <div className="quantityContainer noselect">
+          <span className="decrease" onClick={decreaseQuantity} >-</span>
+          <input className="quantity" type='number' value={quantity} onChange={(e) => setQuantity(e.target.value)}></input>
+          <span className="increase" onClick={increaseQuantity} >+</span>
+          <p>{'$' + (props.data.attributes.price * quantity).toFixed(2)}</p>
+        </div>
+        <div className="footerCloseContainer">
+          <span className="footerButton addToCart" onClick={() => {
+            props.addToCart([props.data, quantity])
+            resetModal()
+          }}> Add to Cart </span>
+          <span className="footerButton closeModal" onClick={resetModal}> Close </span>
+        </div>
+      </ModalFooter>
     </Modal>
   );
 }
@@ -83,10 +84,33 @@ const ModalHeader = styled.div`
 const ModalBody = styled.div`
   border-bottom: .6px solid grey;
   padding: 1rem;
+
+  .specialInstructions{
+    margin-top: 2rem;
+    p{
+      font-weight: 500;
+    }
+
+    textarea{
+      width: 100%;
+      border-radius: .5rem;
+      outline: none;
+      padding: .5rem;
+    }
+  }
+`
+const ModalFooter = styled.div`
+  padding: .5rem .5rem .5rem .5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
   .quantityContainer{
     display: flex;
     flex-direction: row;
     align-items: center;
+
     span{
       padding: .3rem .8rem .3rem .8rem;
       border-radius: .5rem;
@@ -116,35 +140,30 @@ const ModalBody = styled.div`
     }
   }
 
-  .specialInstructions{
-    margin-top: 2rem;
-    p{
+  .footerCloseContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .footerButton{
+      padding: .5rem .8rem .5rem .8rem;
+      height: 3rem;
+      border-radius: .5rem;
+      text-align: center;
       font-weight: 500;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
     }
 
-    textarea{
-      width: 100%;
-      border-radius: .5rem;
-      outline: none;
-      padding: .5rem;
+    .addToCart {
+      background-color: #5cd65c;
+    }
+
+    .closeModal {
+      background-color: #ff5c33;
     }
   }
-`
-
-const AddToCart = styled.span`
-  padding: .5rem .8rem .5rem .8rem;
-  border-radius: .5rem;
-  text-align: center;
-  font-weight: 500;
-  background-color: #5cd65c;
-`
-
-const CloseModal = styled.span`
-  padding: .5rem .8rem .5rem .8rem;
-  border-radius: .5rem;
-  text-align: center;
-  font-weight: 500;
-  background-color: #ff5c33;
 `
 
 const MenuItemModalContainer = styled.div`
