@@ -143,9 +143,10 @@ const SideNav = styled.div`
 `
 
 const CartButton = styled.div`
+  font-size: 1.3rem;
   position: fixed;
-  top: calc(100% - 5rem);
-  left: calc(100% - 5rem);
+  top: calc(100% - 7.3rem);
+  left: calc(80% + (20% - 2rem) / 2);
   color: white;
   border-radius: 100%;
   .fa-stack{
