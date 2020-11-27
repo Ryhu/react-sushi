@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import MenuCategory from './Components/MenuCategory'
 import MenuItemModal from './Components/MenuItemModal'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart,faCircle } from '@fortawesome/free-solid-svg-icons'
 
 
 function App() {
@@ -66,6 +68,13 @@ function App() {
             })
         }
       </SideNav>
+
+      <CartButton>
+        <span class="fa-stack fa-2x">
+          <FontAwesomeIcon className="fa-stack-2x circle" icon={faCircle} />
+          <FontAwesomeIcon className="fa-stack-1x" icon={faShoppingCart} />
+        </span>
+      </CartButton>
 
       { itemModalData && 
         <MenuItemModal data={itemModalData} show={show} handleClose={handleClose} addToCart={addToCart}></MenuItemModal> }
@@ -131,8 +140,25 @@ const SideNav = styled.div`
       transition: 0.5s;
     }
   }
+`
 
-
+const CartButton = styled.div`
+  position: fixed;
+  top: calc(100% - 5rem);
+  left: calc(100% - 5rem);
+  color: white;
+  border-radius: 100%;
+  .fa-stack{
+    .circle{
+      transition: 0.5s;
+      color: gray;
+    }
+    :hover{
+      .circle{
+        color: blue;
+      }
+    }
+  }
 `
 
 const Body = styled.div`
