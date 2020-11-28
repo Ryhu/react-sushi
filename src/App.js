@@ -3,6 +3,7 @@ import './App.css';
 import styled from 'styled-components'
 import MenuCategory from './Components/MenuCategory'
 import MenuItemModal from './Components/MenuItemModal'
+import CartModal from './Components/CartModal'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart,faCircle } from '@fortawesome/free-solid-svg-icons'
@@ -11,20 +12,27 @@ import { faShoppingCart,faCircle } from '@fortawesome/free-solid-svg-icons'
 function App() {
 
   const [data, setData] = useState({})
-  const [show, setShow] = useState(false);
+  const [showItemModal, setShowItemModal] = useState(false);
+  const [showCartModal, setShowCartModal] = useState(false);
   const [itemModalData, setItemModalData] = useState(null);
   const [cart, setCart] = useState([])
 
-  const handleClose = () => setShow(false);
-  const handleShow = (menuItemData) => {
-    setShow(true)
+  const addToCart = (cartItem) => {
+    setCart(cart.concat(cartItem))
+    handleCloseItemModal()
+  }
+
+  const handleCloseItemModal = () => setShowItemModal(false);
+
+  const handleShowItemModal = (menuItemData) => {
     setItemModalData(menuItemData)
+    setShowItemModal(true)
   };
 
-  const addToCart = (dataAndQuantity) => {
-    setCart(cart.concat([dataAndQuantity]))
-    handleClose()
-  }
+
+  const handleCloseCartModal = () => setShowCartModal(false);
+
+  const handleShowCartModal = () => setShowCartModal(true);
 
   useEffect(() => {
     fetch('http://localhost:3000/menu_item', {
@@ -70,20 +78,23 @@ function App() {
       </SideNav>
 
       <CartButton>
-        <span class="fa-stack fa-2x">
+        <span className="fa-stack fa-2x" onClick={handleShowCartModal}>
           <FontAwesomeIcon className="fa-stack-2x circle" icon={faCircle} />
           <FontAwesomeIcon className="fa-stack-1x" icon={faShoppingCart} />
         </span>
       </CartButton>
 
+      {/* Modals */}
       { itemModalData && 
-        <MenuItemModal data={itemModalData} show={show} handleClose={handleClose} addToCart={addToCart}></MenuItemModal> }
+        <MenuItemModal data={itemModalData} addToCart={addToCart} show={showItemModal} handleClose={handleCloseItemModal}></MenuItemModal> }
+
+      <CartModal data={cart} setCart={setCart} show={showCartModal} handleClose={handleCloseCartModal}></CartModal> 
 
       <Body>
         {
           Object.keys(data).length > 1 &&
             Object.keys(data).map(key => {
-              return <MenuCategory data={data[key]} name={key} setItemModalData={handleShow} addToCart={addToCart} key={key} ></MenuCategory>
+              return <MenuCategory data={data[key]} name={key} setItemModalData={handleShowItemModal} addToCart={addToCart} key={key} ></MenuCategory>
             })
         }
       {/* <MenuCategory data={data}></MenuCategory> */}

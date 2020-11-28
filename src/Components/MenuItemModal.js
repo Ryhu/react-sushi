@@ -6,14 +6,15 @@ import Modal from 'react-bootstrap/Modal';
 function MenuItemModal(props) {
 
   const [quantity, setQuantity] = useState(1);
+  const [comments, setComments] = useState('');
   const increaseQuantity = () => setQuantity(quantity + 1);
   const decreaseQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
 
   const resetModal = () => {
     setQuantity(1)
+    setComments('')
     props.handleClose()
   };
-  
 
   return (
     <Modal
@@ -37,7 +38,7 @@ function MenuItemModal(props) {
         <p>{props.data.attributes.description}</p>
         <div className="specialInstructions">
           <p> Special instructions </p>
-          <textarea></textarea>
+          <textarea value={comments} onChange={(e) => setComments(e.target.value)}></textarea>
         </div>
       </ModalBody>
 
@@ -50,7 +51,14 @@ function MenuItemModal(props) {
         </div>
         <div className="footerCloseContainer">
           <span className="footerButton addToCart" onClick={() => {
-            props.addToCart([props.data, quantity])
+            let item = {
+              id: props.data.attributes.id,
+              name: props.data.attributes.name,
+              price: props.data.attributes.price,
+              quantity: quantity,
+              comments: comments,
+            }
+            props.addToCart(item)
             resetModal()
           }}> Add to Cart </span>
           <span className="footerButton closeModal" onClick={resetModal}> Close </span>
