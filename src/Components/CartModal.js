@@ -20,7 +20,7 @@ function CartModal(props) {
       centered
     >
       <ModalHeader>
-        <button onClick={() => console.log(props.data)}>debugger!</button>
+        {/* <button onClick={() => console.log(props.data)}>debugger!</button> */}
         <div>
           <span onClick={props.handleClose}>
             x
@@ -29,44 +29,27 @@ function CartModal(props) {
         </div>
       </ModalHeader>
 
-
       { props.data.length > 0 ?
         <ModalBody>
-          <div className="cartItem">
-
-
-
-
-
-
-
-
-
-            <div className="itemInfo">
-              <div className="nameAndQuantity">
-                <FontAwesomeIcon icon={faTimes} />
-                <span className="quantity">{props.data[0].quantity}</span>
-                <span>{props.data[0].name}</span>
-              </div>
-              <span>{'$' + (props.data[0].quantity * props.data[0].price).toFixed(2)}</span>
-            </div>
-            <div className="itemComments">
-              <span>{props.data[0].comments}</span>
-            </div>
-
-
-
-
-
-
-
-
-
-          </div>
+          {props.data.map(item => {
+            return (<div className="cartItem" key={item.id}>
+                      <div className="itemInfo">
+                        <div className="nameAndQuantity">
+                          <FontAwesomeIcon icon={faTimes} />
+                          <span className="quantity">{item.quantity}</span>
+                          <span>{item.name}</span>
+                        </div>
+                        <span>{'$' + (item.quantity * item.price).toFixed(2)}</span>
+                      </div>
+                      <div className="itemComments">
+                        <span>{item.comments}</span>
+                      </div>
+                    </div>)
+          })}
         </ModalBody>
 
         : <ModalBody>
-            <p className="emptyMessage">Theres nothing here!</p>
+            <p className="emptyMessage">There's nothing here!</p>
           </ModalBody>
       }
 
@@ -104,6 +87,11 @@ const ModalBody = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  .emptyMessage{
+    font-size: 1.3rem;
+    margin: 1.5rem;
+    color: grey;
+  }
   .cartItem{
     padding: .5rem 1rem .5rem 1rem;
     width: 100%;
@@ -132,6 +120,7 @@ const ModalBody = styled.div`
     }
 
     .itemComments{
+      margin-top: -.3rem;
       span{
         font-size: .9rem;
         margin-left: 2rem;
