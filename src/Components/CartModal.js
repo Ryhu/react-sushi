@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
 import Modal from 'react-bootstrap/Modal';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 function CartModal(props) {
 
@@ -29,15 +30,38 @@ function CartModal(props) {
       </ModalHeader>
 
 
-
-
-
       { props.data.length > 0 ?
         <ModalBody>
-          <div className="quantityContainer noselect">
-            <div className="cartItem">
+          <div className="cartItem">
 
+
+
+
+
+
+
+
+
+            <div className="itemInfo">
+              <div className="nameAndQuantity">
+                <FontAwesomeIcon icon={faTimes} />
+                <span className="quantity">{props.data[0].quantity}</span>
+                <span>{props.data[0].name}</span>
+              </div>
+              <span>{'$' + (props.data[0].quantity * props.data[0].price).toFixed(2)}</span>
             </div>
+            <div className="itemComments">
+              <span>{props.data[0].comments}</span>
+            </div>
+
+
+
+
+
+
+
+
+
           </div>
         </ModalBody>
 
@@ -45,9 +69,6 @@ function CartModal(props) {
             <p className="emptyMessage">Theres nothing here!</p>
           </ModalBody>
       }
-
-
-
 
       <Modal.Footer>
         {/* <button variant="primary" onClick={() => {
@@ -80,37 +101,41 @@ const ModalHeader = styled.div`
 `
 const ModalBody = styled.div`
   border-bottom: .6px solid grey;
-  padding: 1rem;
-  .quantityContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .cartItem{
+    padding: .5rem 1rem .5rem 1rem;
+    width: 100%;
+    border-bottom: 0.6px solid grey;
     span{
-      padding: .3rem .8rem .3rem .8rem;
-      border-radius: .5rem;
       font-size: 1.3rem;
-      font-weight: bold;
       text-align: center;
     }
+    .itemInfo{
+      text-align: left;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .nameAndQuantity{
+        display: inline-block;
 
-    .increase{
-      background-color: #5cd65c;
-      border-radius:  .5rem 2rem 2rem .5rem;
+        svg{
+          color: red;
+          font-size: 1.2rem;
+        }
+
+        .quantity{
+          margin: 0 1rem 0 1rem;
+        }
+      }
     }
 
-    .decrease{
-      background-color: #ff5c33;
-      border-radius:  2rem .5rem .5rem 2rem;
-    }
-
-    p{
-      margin:0 0 0 1rem;
-    }
-
-    .quantity{
-      width: 2.5rem;
-      text-align: center;
-      margin: 0 .3rem 0 .3rem;
+    .itemComments{
+      span{
+        font-size: .9rem;
+        margin-left: 2rem;
+      }
     }
   }
 `
