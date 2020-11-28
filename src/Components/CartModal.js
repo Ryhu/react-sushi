@@ -6,15 +6,10 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 function CartModal(props) {
 
-  const resetModal = () => {
-    props.handleClose()
-  };
-  
-
   return (
     <Modal
       show={props.show}
-      onHide={resetModal}
+      onHide={props.handleClose}
       backdrop="static"
       keyboard={false}
       centered
@@ -54,13 +49,13 @@ function CartModal(props) {
       }
 
       <Modal.Footer>
-        {/* <button variant="primary" onClick={() => {
-          props.addToCart([props.data, quantity])
-          resetModal()
-        }}> Add to Cart </button>
-        <button variant="secondary" onClick={resetModal}> Close </button> */}
-
-        uoooo
+        <button variant="primary" 
+        // onClick={() => {
+        //   props.addToCart([props.data, quantity])
+        //   resetModal()
+        // }}
+        > Add to Cart </button>
+        <button variant="secondary" onClick={props.handleClose}> Close </button>
       </Modal.Footer>
     </Modal>
   );
@@ -127,6 +122,73 @@ const ModalBody = styled.div`
         font-size: .9rem;
         box-sizing: border-box
       }
+    }
+  }
+`
+
+const ModalFooter = styled.div`
+  padding: .5rem .5rem .5rem .5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .quantityContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    span{
+      padding: .3rem .8rem .3rem .8rem;
+      border-radius: .5rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .increase{
+      background-color: #5cd65c;
+      border-radius:  .5rem 1rem 1rem .5rem;
+    }
+
+    .decrease{
+      background-color: #ff5c33;
+      border-radius:  1rem .5rem .5rem 1rem;
+    }
+
+    p{
+      margin:0 0 0 1rem;
+    }
+
+    .quantity{
+      width: 2.5rem;
+      text-align: center;
+      margin: 0 .3rem 0 .3rem;
+    }
+  }
+
+  .footerCloseContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .footerButton{
+      padding: .5rem .8rem .5rem .8rem;
+      height: 3rem;
+      border-radius: .5rem;
+      text-align: center;
+      font-weight: 500;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .addToCart {
+      background-color: #5cd65c;
+    }
+
+    .closeModal {
+      background-color: #ff5c33;
     }
   }
 `
