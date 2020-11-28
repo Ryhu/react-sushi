@@ -120,10 +120,12 @@ const ModalBody = styled.div`
     }
 
     .itemComments{
-      margin-top: -.3rem;
+      margin-top: -.2rem;
+      padding-left: 2rem;
       span{
+        word-wrap: break-word;
         font-size: .9rem;
-        margin-left: 2rem;
+        box-sizing: border-box
       }
     }
   }
