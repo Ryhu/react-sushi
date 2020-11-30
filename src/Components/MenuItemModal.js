@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
 import Modal from 'react-bootstrap/Modal';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 function MenuItemModal(props) {
 
@@ -25,9 +26,7 @@ function MenuItemModal(props) {
       <ModalHeader>
         <div>
           <Modal.Title>{props.data.attributes.name}</Modal.Title>
-          <span onClick={resetModal}>
-            x
-          </span>
+          <FontAwesomeIcon icon={faTimes} onClick={resetModal}/>
         </div>
         <p className="headerPrice">{'$' + props.data.attributes.price.toFixed(2)}</p>
       </ModalHeader>
@@ -73,10 +72,10 @@ const ModalHeader = styled.div`
     flex-direction: row;
     justify-content: space-between;
 
-    span{
-      text-decoration: none;
+    svg{
+      color: red;
+      font-size: 2rem;
       cursor: pointer;
-      font-size: 1.8rem;
       padding-right: .5rem;
     }
   }

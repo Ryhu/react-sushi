@@ -17,13 +17,8 @@ function CartModal(props) {
       centered
     >
       <ModalHeader>
-        {/* <button onClick={() => console.log(props.data)}>debugger!</button> */}
-        <div>
-          <span onClick={props.handleClose}>
-            x
-          </span>
-          <Modal.Title>Cart</Modal.Title>
-        </div>
+        <FontAwesomeIcon icon={faTimes} onClick={props.handleClose}/>
+        <Modal.Title>Cart</Modal.Title>
       </ModalHeader>
 
       { props.data.length > 0 ?
@@ -62,18 +57,16 @@ function CartModal(props) {
 
 const ModalHeader = styled.div`
   border-bottom: .6px solid grey;
-  div{
-    padding: .5rem;
-    text-align: center;
+  padding: .5rem;
+  text-align: center;
 
-    span{
-      position: absolute;
-      left: calc(100% - 2rem);
-      text-decoration: none;
-      cursor: pointer;
-      font-size: 1.8rem;
-      padding-right: .5rem;
-    }
+  svg{
+    color: red;
+    font-size: 2rem;
+    position: absolute;
+    left: calc(100% - 2rem);
+    cursor: pointer;
+    padding-right: .5rem;
   }
 `
 const ModalBody = styled.div`
