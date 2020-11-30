@@ -48,15 +48,12 @@ function CartModal(props) {
           </ModalBody>
       }
 
-      <Modal.Footer>
-        <button variant="primary" 
-        // onClick={() => {
-        //   props.addToCart([props.data, quantity])
-        //   resetModal()
-        // }}
-        > Add to Cart </button>
-        <button variant="secondary" onClick={props.handleClose}> Close </button>
-      </Modal.Footer>
+      <ModalFooter>
+        <div className="footerContainer">
+          <span className="footerButton resetModal"> Empty Cart </span>
+          <span className="footerButton checkout" onClick={() => {}}> Checkout </span>
+        </div>
+      </ModalFooter>
     </Modal>
   );
 }
@@ -127,50 +124,17 @@ const ModalBody = styled.div`
 `
 
 const ModalFooter = styled.div`
-  padding: .5rem .5rem .5rem .5rem;
+  padding: .8rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
-  .quantityContainer{
+  .footerContainer {
     display: flex;
     flex-direction: row;
-    align-items: center;
-
-    span{
-      padding: .3rem .8rem .3rem .8rem;
-      border-radius: .5rem;
-      font-size: 1.3rem;
-      font-weight: bold;
-      text-align: center;
-    }
-
-    .increase{
-      background-color: #5cd65c;
-      border-radius:  .5rem 1rem 1rem .5rem;
-    }
-
-    .decrease{
-      background-color: #ff5c33;
-      border-radius:  1rem .5rem .5rem 1rem;
-    }
-
-    p{
-      margin:0 0 0 1rem;
-    }
-
-    .quantity{
-      width: 2.5rem;
-      text-align: center;
-      margin: 0 .3rem 0 .3rem;
-    }
-  }
-
-  .footerCloseContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    width: 100%;
+    justify-content: space-between;
 
     .footerButton{
       padding: .5rem .8rem .5rem .8rem;
@@ -181,14 +145,15 @@ const ModalFooter = styled.div`
       display: flex;
       flex-direction: row;
       align-items: center;
+      cursor: pointer;
     }
 
-    .addToCart {
-      background-color: #5cd65c;
-    }
-
-    .closeModal {
+    .resetModal {
       background-color: #ff5c33;
+    }
+
+    .checkout {
+      background-color: #5cd65c;
     }
   }
 `

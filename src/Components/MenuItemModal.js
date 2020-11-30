@@ -108,7 +108,7 @@ const ModalBody = styled.div`
   }
 `
 const ModalFooter = styled.div`
-  padding: .5rem .5rem .5rem .5rem;
+  padding: .8rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -125,6 +125,7 @@ const ModalFooter = styled.div`
       font-size: 1.3rem;
       font-weight: bold;
       text-align: center;
+      cursor: pointer;
     }
 
     .increase{
@@ -162,6 +163,7 @@ const ModalFooter = styled.div`
       display: flex;
       flex-direction: row;
       align-items: center;
+      cursor: pointer;
     }
 
     .addToCart {
