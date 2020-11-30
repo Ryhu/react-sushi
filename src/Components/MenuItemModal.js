@@ -20,8 +20,6 @@ function MenuItemModal(props) {
     <Modal
       show={props.show}
       onHide={resetModal}
-      backdrop="static"
-      keyboard={false}
       centered
     >
       <ModalHeader>
