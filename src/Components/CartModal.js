@@ -10,6 +10,10 @@ function CartModal(props) {
     props.setData(props.data.slice(0,index).concat(props.data.slice(index+1)))
   };
 
+  const checkout = () => {
+    alert('checkitout!')
+  };
+
   return (
     <Modal
       show={props.show}
@@ -47,8 +51,8 @@ function CartModal(props) {
 
       <ModalFooter>
         <div className="footerContainer">
-          <span className="footerButton resetModal" onClick={() => {props.setData([])}}> Empty Cart </span>
-          <span className="footerButton checkout" onClick={() => {}}> Checkout </span>
+          <span className={(props.data.length > 0 ? "resetModal" : "disabled") + " noselect footerButton"} onClick={() => {props.setData([])}}> Empty Cart </span>
+          <span className={(props.data.length > 0 ? "checkout" : "disabled") + " noselect footerButton"} onClick={checkout}> Checkout </span>
         </div>
       </ModalFooter>
     </Modal>
@@ -150,6 +154,12 @@ const ModalFooter = styled.div`
 
     .checkout {
       background-color: #5cd65c;
+    }
+
+    .disabled {
+      background-color: grey;
+      pointer-events: none;
+      opacity: 70%;
     }
   }
 `
