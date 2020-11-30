@@ -175,10 +175,4 @@ const ModalFooter = styled.div`
   }
 `
 
-const MenuItemModalContainer = styled.div`
-  display: inline-block;
-  margin: 1rem;
-`
-
-
 export default MenuItemModal;

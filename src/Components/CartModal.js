@@ -1,10 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 function CartModal(props) {
+
+  const removeItem = (index) => {
+    props.setData(props.data.slice(0,index).concat(props.data.slice(index+1)))
+  };
 
   return (
     <Modal
@@ -26,11 +30,11 @@ function CartModal(props) {
 
       { props.data.length > 0 ?
         <ModalBody>
-          {props.data.map(item => {
-            return (<div className="cartItem" key={item.id}>
+          {props.data.map((item, index) => {
+            return (<div className="cartItem" key={index}>
                       <div className="itemInfo">
                         <div className="nameAndQuantity">
-                          <FontAwesomeIcon icon={faTimes} />
+                          <FontAwesomeIcon icon={faTimes} onClick={(e) => {removeItem(index)}}/>
                           <span className="quantity">{item.quantity}</span>
                           <span>{item.name}</span>
                         </div>
@@ -50,7 +54,7 @@ function CartModal(props) {
 
       <ModalFooter>
         <div className="footerContainer">
-          <span className="footerButton resetModal" onClick={() => {props.setCart([])}}> Empty Cart </span>
+          <span className="footerButton resetModal" onClick={() => {props.setData([])}}> Empty Cart </span>
           <span className="footerButton checkout" onClick={() => {}}> Checkout </span>
         </div>
       </ModalFooter>
@@ -85,7 +89,7 @@ const ModalBody = styled.div`
     color: grey;
   }
   .cartItem{
-    padding: .5rem 1rem .5rem 1rem;
+    padding: .5rem 1.2rem .5rem 1.2rem;
     width: 100%;
     border-bottom: 0.6px solid grey;
     span{
@@ -103,6 +107,7 @@ const ModalBody = styled.div`
         svg{
           color: red;
           font-size: 1.2rem;
+          cursor: pointer;
         }
 
         .quantity{
@@ -157,11 +162,5 @@ const ModalFooter = styled.div`
     }
   }
 `
-
-const CartPageContainer = styled.div`
-  display: inline-block;
-  margin: 1rem;
-`
-
 
 export default CartModal;

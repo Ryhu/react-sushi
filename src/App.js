@@ -88,7 +88,7 @@ function App() {
       { itemModalData && 
         <MenuItemModal data={itemModalData} addToCart={addToCart} show={showItemModal} handleClose={handleCloseItemModal}></MenuItemModal> }
 
-      <CartModal data={cart} setCart={setCart} show={showCartModal} handleClose={handleCloseCartModal}></CartModal> 
+      <CartModal data={cart} setData={setCart} show={showCartModal} handleClose={handleCloseCartModal}></CartModal> 
 
       <Body>
         {
