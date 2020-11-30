@@ -28,6 +28,10 @@ input[type="number"] {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+.modal-open {
+  overflow-y: overlay !important;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
