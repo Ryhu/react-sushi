@@ -61,7 +61,6 @@ function MenuItemModal(props) {
             props.addToCart(item)
             resetModal()
           }}> Add to Cart </span>
-          <span className="footerButton closeModal" onClick={resetModal}> Close </span>
         </div>
       </ModalFooter>
     </Modal>

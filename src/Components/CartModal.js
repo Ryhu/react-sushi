@@ -50,7 +50,7 @@ function CartModal(props) {
 
       <ModalFooter>
         <div className="footerContainer">
-          <span className="footerButton resetModal"> Empty Cart </span>
+          <span className="footerButton resetModal" onClick={() => {props.setCart([])}}> Empty Cart </span>
           <span className="footerButton checkout" onClick={() => {}}> Checkout </span>
         </div>
       </ModalFooter>
