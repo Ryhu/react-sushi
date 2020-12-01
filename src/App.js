@@ -35,7 +35,9 @@ function App() {
   const handleShowCartModal = () => setShowCartModal(true);
 
   useEffect(() => {
-    fetch('http://localhost:3000/menu_item', {
+    // heroku server
+    fetch('https://react-sushi-backend.herokuapp.com/menu_item', {
+    // fetch('http://localhost:3000/menu_item', {
       method: 'get',
       mode: 'cors',
       headers: {
