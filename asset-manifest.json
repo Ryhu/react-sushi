@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/react-sushi/static/css/main.b4b32c0a.chunk.css",
-    "main.js": "/react-sushi/static/js/main.95ae31bb.chunk.js",
-    "main.js.map": "/react-sushi/static/js/main.95ae31bb.chunk.js.map",
+    "main.js": "/react-sushi/static/js/main.7ff2f865.chunk.js",
+    "main.js.map": "/react-sushi/static/js/main.7ff2f865.chunk.js.map",
     "runtime-main.js": "/react-sushi/static/js/runtime-main.be6db34f.js",
     "runtime-main.js.map": "/react-sushi/static/js/runtime-main.be6db34f.js.map",
     "static/css/2.2a86faee.chunk.css": "/react-sushi/static/css/2.2a86faee.chunk.css",
     "static/js/2.5e704e29.chunk.js": "/react-sushi/static/js/2.5e704e29.chunk.js",
     "static/js/2.5e704e29.chunk.js.map": "/react-sushi/static/js/2.5e704e29.chunk.js.map",
     "index.html": "/react-sushi/index.html",
-    "precache-manifest.35645bdc903453bf7522ec89a67b7203.js": "/react-sushi/precache-manifest.35645bdc903453bf7522ec89a67b7203.js",
+    "precache-manifest.e9134d3616d817faee18f436744e0c9e.js": "/react-sushi/precache-manifest.e9134d3616d817faee18f436744e0c9e.js",
     "service-worker.js": "/react-sushi/service-worker.js",
     "static/css/2.2a86faee.chunk.css.map": "/react-sushi/static/css/2.2a86faee.chunk.css.map",
     "static/css/main.b4b32c0a.chunk.css.map": "/react-sushi/static/css/main.b4b32c0a.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.2a86faee.chunk.css",
     "static/js/2.5e704e29.chunk.js",
     "static/css/main.b4b32c0a.chunk.css",
-    "static/js/main.95ae31bb.chunk.js"
+    "static/js/main.7ff2f865.chunk.js"
   ]
 }
