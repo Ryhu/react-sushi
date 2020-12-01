@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import styled from 'styled-components'
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
 import MenuPage from './Components/MenuPage'
 import HomePage from './Components/HomePage'
 
@@ -23,14 +23,14 @@ function App() {
     <div className="App">
       <HeaderContainer>
         <div className={(show ? "active" : "hidden") + " header"}>
-          <Link to="/home"><span className="headerOption">Home</span></Link>
+          <Link to="/"><span className="headerOption">Home</span></Link>
           <Link to="/menu"><span className="headerOption">Menu</span></Link>
         </div>
       </HeaderContainer>
       <main>
         <Switch>
+            <Route path="/" component={HomePage} />
             <Route path="/menu" component={MenuPage} />
-            <Route path="/home" component={HomePage} />
             {/* <Route path="/shop" component={Shop} /> */}
         </Switch>
       </main>
