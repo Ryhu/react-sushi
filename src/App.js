@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Route, Switch, Link } from 'react-router-dom';
 import MenuPage from './Components/MenuPage'
 import HomePage from './Components/HomePage'
+import CheckoutPage from './Components/CheckoutPage'
 import { connect } from 'react-redux'; 
 
 function App(props) {
@@ -52,20 +53,19 @@ function App(props) {
         <div className={(show ? "active" : "hidden") + " header"}>
           <Link to="/"><span className="headerOption">Home</span></Link>
           <Link to="/menu"><span className="headerOption">Menu</span></Link>
+          <Link to="/checkout"><span className="headerOption">Checkout(hidden)</span></Link>
         </div>
       </HeaderContainer>
       <main>
         <Switch>
           <Route path="/menu" component={MenuPage} />
+          <Route path="/checkout" component={CheckoutPage} />
           <Route path="/" component={HomePage} />
         </Switch>
       </main>
     </div>
   );
 }
-
-//name, email, number, address
-// payment
 
 const HeaderContainer = styled.div`
   padding-top: 4rem;

@@ -31,7 +31,7 @@ function MenuPage(props) {
 
   return (
     <MenuPageContainer>
-    <button onClick={() => console.log(props.data)}>hohohohoho</button>
+    {/* <button onClick={() => console.log(props.data)}>hohohohoho</button> */}
       <SideNav>
         {
           Object.keys(props.data).length > 1 &&
