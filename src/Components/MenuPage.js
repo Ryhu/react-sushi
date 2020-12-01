@@ -56,7 +56,7 @@ function MenuPage() {
   }, []);
 
   return (
-    <div className="App">
+    <MenuPageContainer>
       <SideNav>
         {
           Object.keys(data).length > 1 &&
@@ -90,9 +90,12 @@ function MenuPage() {
         }
       {/* <MenuCategory data={data}></MenuCategory> */}
       </Body>
-    </div>
+    </MenuPageContainer>
   );
 }
+
+const MenuPageContainer = styled.div`
+`
 
 const SideNav = styled.div`
   position: fixed;

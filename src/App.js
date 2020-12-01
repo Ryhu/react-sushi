@@ -39,6 +39,7 @@ function App() {
 }
 
 const HeaderContainer = styled.div`
+  padding-top: 4rem;
   .header{
     background-color: blue;
     padding: 1rem;

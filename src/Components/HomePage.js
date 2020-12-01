@@ -4,13 +4,16 @@ import styled from 'styled-components'
 
 function HomePage() {
   return (
-    <div className="App">
+    <HomePageContainer>
       <Body>
-        hi guys
+        sushi pictures and sushi words go here
       </Body>
-    </div>
+    </HomePageContainer>
   );
 }
+
+const HomePageContainer = styled.div`
+`
 
 const Body = styled.div`
   width: 80vw;
