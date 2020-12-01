@@ -101,7 +101,6 @@ function App() {
         }
       {/* <MenuCategory data={data}></MenuCategory> */}
       </Body>
-      <button onClick={() => console.log(cart)}>debugger!</button>
     </div>
   );
 }
