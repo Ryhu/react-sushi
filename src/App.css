@@ -5,6 +5,7 @@
 /* allows menu navigation to be smoother */
 html{
   scroll-behavior: smooth;
+  overflow-y: overlay
 }
 
 /* turns off basic increase/decrease selectors for number input */
