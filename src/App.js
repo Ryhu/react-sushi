@@ -1,18 +1,32 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import styled from 'styled-components'
 import { Route, Switch, Link } from 'react-router-dom';
 import MenuPage from './Components/MenuPage'
 import HomePage from './Components/HomePage'
 
-
 function App() {
+
+  const [show, setShow] = useState(true)
+  const [scrollPos, setScrollPos] = useState(0)
+
+  const handleScroll = () => {
+    setScrollPos(document.body.getBoundingClientRect().top)
+    setShow(document.body.getBoundingClientRect().top > scrollPos)
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  });
+
   return (
     <div className="App">
-      <Header>
-        <Link to="/home"><span className="headerOption">Home</span></Link>
-        <Link to="/menu"><span className="headerOption">Menu</span></Link>
-      </Header>
+      <HeaderContainer>
+        <div className={(show ? "active" : "hidden") + " header"}>
+          <Link to="/home"><span className="headerOption">Home</span></Link>
+          <Link to="/menu"><span className="headerOption">Menu</span></Link>
+        </div>
+      </HeaderContainer>
       <main>
         <Switch>
             <Route path="/menu" component={MenuPage} />
@@ -24,12 +38,31 @@ function App() {
   );
 }
 
-const Header = styled.div`
-  background-color: blue;
-  color: white;
+const HeaderContainer = styled.div`
+  .header{
+    background-color: blue;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: block;
+    transition: top 0.3s;
+    
+    .headerOption {
+      color: white;
+      margin: 3rem;
+      padding: 0.5rem;
+    }
+  }
 
-  .headerOption {
-    margin: 3rem;
+  .active {
+    visibility: visible;
+    transition: 200ms;
+  }
+  .hidden {
+    visibility: hidden;
+    transition: 200ms;
+    transform: translate(0, -100%);
   }
 `
 
