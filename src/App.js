@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import styled from 'styled-components'
-import { Route, Switch, Link, Redirect } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import MenuPage from './Components/MenuPage'
 import HomePage from './Components/HomePage'
+import { connect } from 'react-redux'; 
 
-function App() {
-
+function App(props) {
+  const [data, setData] = useState({})
   const [show, setShow] = useState(true)
   const [scrollPos, setScrollPos] = useState(0)
 
@@ -19,6 +20,32 @@ function App() {
     window.addEventListener("scroll", handleScroll);
   });
 
+  useEffect(() => {
+    // heroku server
+    fetch('https://react-sushi-backend.herokuapp.com/menu_item', {
+    // fetch('http://localhost:3000/menu_item', {
+      method: 'get',
+      mode: 'cors',
+      headers: {
+          'Content-Type': 'application/json',
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        let categories = {}
+
+        data.data.forEach(menuItem => {
+          if (categories[menuItem.attributes.category]){
+            categories[menuItem.attributes.category] = categories[menuItem.attributes.category].concat(menuItem)
+          } else {
+            categories[menuItem.attributes.category] = [menuItem]
+          }
+        })
+        setData(categories)
+        props.SetData(categories);
+      });
+  }, []);
+
   return (
     <div className="App">
       <HeaderContainer>
@@ -29,14 +56,16 @@ function App() {
       </HeaderContainer>
       <main>
         <Switch>
-            <Route path="/" component={HomePage} />
-            <Route path="/menu" component={MenuPage} />
-            {/* <Route path="/shop" component={Shop} /> */}
+          <Route path="/menu" component={MenuPage} />
+          <Route path="/" component={HomePage} />
         </Switch>
       </main>
     </div>
   );
 }
+
+//name, email, number, address
+// payment
 
 const HeaderContainer = styled.div`
   padding-top: 4rem;
@@ -67,4 +96,10 @@ const HeaderContainer = styled.div`
   }
 `
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    SetData: (data) => dispatch({ type: 'SET_DATA', data: data }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);

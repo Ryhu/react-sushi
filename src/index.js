@@ -5,11 +5,21 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from "react-redux";
+import { createStore } from 'redux';
+import MenuReducer from './reducers/menu.js';
+
+const store = createStore(
+  MenuReducer, 
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <App />
-  </BrowserRouter>, 
+  <Provider store={store}>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <App />
+    </BrowserRouter>, 
+  </Provider>,
   document.getElementById('root')
 )
 

@@ -5,62 +5,37 @@ import MenuItemModal from './MenuItemModal'
 import CartModal from './CartModal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart,faCircle } from '@fortawesome/free-solid-svg-icons'
+import { connect } from 'react-redux'; 
 
-function MenuPage() {
-  const [data, setData] = useState({})
+function MenuPage(props) {
   const [showItemModal, setShowItemModal] = useState(false);
   const [showCartModal, setShowCartModal] = useState(false);
   const [itemModalData, setItemModalData] = useState(null);
   const [cart, setCart] = useState([])
 
+  const handleCloseItemModal = () => setShowItemModal(false);
+  
+  const handleShowItemModal = (menuItemData) => {
+    setItemModalData(menuItemData)
+    setShowItemModal(true)
+  };
+  
+  const handleCloseCartModal = () => setShowCartModal(false);
+  
+  const handleShowCartModal = () => setShowCartModal(true);
+  
   const addToCart = (cartItem) => {
     setCart(cart.concat(cartItem))
     handleCloseItemModal()
   }
 
-  const handleCloseItemModal = () => setShowItemModal(false);
-
-  const handleShowItemModal = (menuItemData) => {
-    setItemModalData(menuItemData)
-    setShowItemModal(true)
-  };
-
-
-  const handleCloseCartModal = () => setShowCartModal(false);
-
-  const handleShowCartModal = () => setShowCartModal(true);
-
-  useEffect(() => {
-    // heroku server
-    fetch('https://react-sushi-backend.herokuapp.com/menu_item', {
-    // fetch('http://localhost:3000/menu_item', {
-      method: 'get',
-      mode: 'cors',
-      headers: {
-          'Content-Type': 'application/json',
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        let categories = {}
-
-        data.data.forEach(menuItem => {
-          if (categories[menuItem.attributes.category]){
-            categories[menuItem.attributes.category] = categories[menuItem.attributes.category].concat(menuItem)
-          } else {
-            categories[menuItem.attributes.category] = [menuItem]
-          }
-        })
-        setData(categories)
-      });
-  }, []);
-
   return (
     <MenuPageContainer>
+    <button onClick={() => console.log(props.data)}>hohohohoho</button>
       <SideNav>
         {
-          Object.keys(data).length > 1 &&
-            Object.keys(data).map(key => {
+          Object.keys(props.data).length > 1 &&
+            Object.keys(props.data).map(key => {
               return <a className="sideNavButton" href={"#menuCategory" + key} key={key}>
                 { key }
               </a>
@@ -83,12 +58,11 @@ function MenuPage() {
 
       <Body>
         {
-          Object.keys(data).length > 1 &&
-            Object.keys(data).map(key => {
-              return <MenuCategory data={data[key]} name={key} setItemModalData={handleShowItemModal} addToCart={addToCart} key={key} ></MenuCategory>
+          Object.keys(props.data).length > 1 &&
+            Object.keys(props.data).map(key => {
+              return <MenuCategory data={props.data[key]} name={key} setItemModalData={handleShowItemModal} addToCart={addToCart} key={key} ></MenuCategory>
             })
         }
-      {/* <MenuCategory data={data}></MenuCategory> */}
       </Body>
     </MenuPageContainer>
   );
@@ -147,5 +121,6 @@ const Body = styled.div`
   margin: auto;
 `
 
-
-export default MenuPage;
+const mapStateToProps = (state) => ({data: state.data});
+ 
+export default connect(mapStateToProps)(MenuPage);
