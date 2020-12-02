@@ -54,7 +54,7 @@ function MenuPage(props) {
       { itemModalData && 
         <MenuItemModal data={itemModalData} addToCart={addToCart} show={showItemModal} handleClose={handleCloseItemModal}></MenuItemModal> }
 
-      <CartModal data={cart} setData={setCart} show={showCartModal} handleClose={handleCloseCartModal}></CartModal> 
+      <CartModal setData={setCart} show={showCartModal} handleClose={handleCloseCartModal}></CartModal> 
 
       <Body>
         {

@@ -8,7 +8,6 @@ import CheckoutPage from './Components/CheckoutPage'
 import { connect } from 'react-redux'; 
 
 function App(props) {
-  const [data, setData] = useState({})
   const [show, setShow] = useState(true)
   const [scrollPos, setScrollPos] = useState(0)
 
@@ -42,7 +41,6 @@ function App(props) {
             categories[menuItem.attributes.category] = [menuItem]
           }
         })
-        setData(categories)
         props.SetData(categories);
       });
   }, []);

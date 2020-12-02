@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { connect } from 'react-redux'; 
 
 function CartModal(props) {
 
@@ -24,6 +25,7 @@ function CartModal(props) {
         <FontAwesomeIcon icon={faTimes} onClick={props.handleClose}/>
         <Modal.Title>Cart</Modal.Title>
       </ModalHeader>
+      { console.log(props) }
 
       { props.data.length > 0 ?
         <ModalBody>
@@ -164,4 +166,15 @@ const ModalFooter = styled.div`
   }
 `
 
-export default CartModal;
+// export default CartModal;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    SetCart: (data) => dispatch({ type: 'SET_CART', data: data }),
+  };
+};
+
+const mapStateToProps = (state) => ({data: state.data});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartModal);
+ 
