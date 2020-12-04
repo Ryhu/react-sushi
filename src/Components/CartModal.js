@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 function CartModal(props) {
 
   const removeItem = (index) => {
-    props.setData(props.data.slice(0,index).concat(props.data.slice(index+1)))
+    props.SetCart(props.cart.slice(0,index).concat(props.cart.slice(index+1)))
   };
 
   const checkout = () => {
@@ -27,9 +27,9 @@ function CartModal(props) {
       </ModalHeader>
       { console.log(props) }
 
-      { props.data.length > 0 ?
+      { props.cart.length > 0 ?
         <ModalBody>
-          {props.data.map((item, index) => {
+          {props.cart.map((item, index) => {
             return (<div className="cartItem" key={index}>
                       <div className="itemInfo">
                         <div className="nameAndQuantity">
@@ -53,8 +53,8 @@ function CartModal(props) {
 
       <ModalFooter>
         <div className="footerContainer">
-          <span className={(props.data.length > 0 ? "resetModal" : "disabled") + " noselect footerButton"} onClick={() => {props.setData([])}}> Empty Cart </span>
-          <span className={(props.data.length > 0 ? "checkout" : "disabled") + " noselect footerButton"} onClick={checkout}> Checkout </span>
+          <span className={(props.cart.length > 0 ? "resetModal" : "disabled") + " noselect footerButton"} onClick={() => {props.SetCart([])}}> Empty Cart </span>
+          <span className={(props.cart.length > 0 ? "checkout" : "disabled") + " noselect footerButton"} onClick={checkout}> Checkout </span>
         </div>
       </ModalFooter>
     </Modal>
@@ -174,7 +174,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const mapStateToProps = (state) => ({data: state.cart.data});
+const mapStateToProps = (state) => ({cart: state.cart.data});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartModal);
  

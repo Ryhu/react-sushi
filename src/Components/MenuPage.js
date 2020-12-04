@@ -11,7 +11,6 @@ function MenuPage(props) {
   const [showItemModal, setShowItemModal] = useState(false);
   const [showCartModal, setShowCartModal] = useState(false);
   const [itemModalData, setItemModalData] = useState(null);
-  const [cart, setCart] = useState([])
 
   const handleCloseItemModal = () => setShowItemModal(false);
   
@@ -49,7 +48,7 @@ function MenuPage(props) {
       { itemModalData && 
         <MenuItemModal data={itemModalData} show={showItemModal} handleClose={handleCloseItemModal}></MenuItemModal> }
 
-      <CartModal setData={setCart} show={showCartModal} handleClose={handleCloseCartModal}></CartModal> 
+      <CartModal show={showCartModal} handleClose={handleCloseCartModal}></CartModal> 
 
       <Body>
         {
