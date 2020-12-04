@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { connect } from 'react-redux'; 
 
 function MenuItemModal(props) {
 
@@ -16,6 +17,10 @@ function MenuItemModal(props) {
     setComments('')
     props.handleClose()
   };
+
+  const addToCart = (item) => {
+    props.SetCart(props.cart.slice().concat(item))
+  }
 
   return (
     <Modal
@@ -55,7 +60,7 @@ function MenuItemModal(props) {
               quantity: quantity,
               comments: comments,
             }
-            props.addToCart(item)
+            addToCart(item)
             resetModal()
           }}> Add to Cart </span>
         </div>
@@ -172,4 +177,12 @@ const ModalFooter = styled.div`
   }
 `
 
-export default MenuItemModal;
+const mapDispatchToProps = dispatch => {
+  return {
+    SetCart: (data) => dispatch({ type: 'SET_CART', data: data }),
+  };
+};
+
+const mapStateToProps = (state) => ({cart: state.cart.data});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuItemModal);

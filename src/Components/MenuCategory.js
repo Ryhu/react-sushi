@@ -14,7 +14,6 @@ function MenuCategory(props) {
               return <ItemTile 
                         data={menuItem}
                         key={menuItem.attributes.id}
-                        addToCart={props.addToCart}
                         setItemModalData={props.setItemModalData}>
                       </ItemTile>
         })) }

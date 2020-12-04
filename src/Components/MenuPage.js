@@ -24,11 +24,6 @@ function MenuPage(props) {
   
   const handleShowCartModal = () => setShowCartModal(true);
   
-  const addToCart = (cartItem) => {
-    setCart(cart.concat(cartItem))
-    handleCloseItemModal()
-  }
-
   return (
     <MenuPageContainer>
     {/* <button onClick={() => console.log(props.data)}>hohohohoho</button> */}
@@ -52,7 +47,7 @@ function MenuPage(props) {
 
       {/* Modals */}
       { itemModalData && 
-        <MenuItemModal data={itemModalData} addToCart={addToCart} show={showItemModal} handleClose={handleCloseItemModal}></MenuItemModal> }
+        <MenuItemModal data={itemModalData} show={showItemModal} handleClose={handleCloseItemModal}></MenuItemModal> }
 
       <CartModal setData={setCart} show={showCartModal} handleClose={handleCloseCartModal}></CartModal> 
 
@@ -60,7 +55,7 @@ function MenuPage(props) {
         {
           Object.keys(props.data).length > 1 &&
             Object.keys(props.data).map(key => {
-              return <MenuCategory data={props.data[key]} name={key} setItemModalData={handleShowItemModal} addToCart={addToCart} key={key} ></MenuCategory>
+              return <MenuCategory data={props.data[key]} name={key} setItemModalData={handleShowItemModal} key={key} ></MenuCategory>
             })
         }
       </Body>
