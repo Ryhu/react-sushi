@@ -174,7 +174,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const mapStateToProps = (state) => ({data: state.data});
+const mapStateToProps = (state) => ({data: state.cart.data});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartModal);
  

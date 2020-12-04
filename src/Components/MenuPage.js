@@ -121,6 +121,6 @@ const Body = styled.div`
   margin: auto;
 `
 
-const mapStateToProps = (state) => ({data: state.data});
+const mapStateToProps = (state) => ({data: state.menu.data});
  
 export default connect(mapStateToProps)(MenuPage);

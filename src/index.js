@@ -7,10 +7,10 @@ import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from "react-redux";
 import { createStore } from 'redux';
-import MenuReducer from './reducers/menu.js';
+import RootReducer from './reducers/root.js';
 
 const store = createStore(
-  MenuReducer, 
+  RootReducer, 
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
