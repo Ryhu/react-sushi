@@ -22,7 +22,7 @@ function App(props) {
 
   useEffect(() => {
     // heroku server
-    fetch('https://react-sushi-backend.herokuapp.com/menu_item', {
+    fetch('https://react-sushi-backend.herokuapp.com/menu_items', {
     // fetch('http://localhost:3000/menu_item', {
       method: 'get',
       mode: 'cors',

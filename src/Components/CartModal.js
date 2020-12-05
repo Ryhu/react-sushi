@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'; 
+import { useHistory } from "react-router-dom";
 
 function CartModal(props) {
 
@@ -11,8 +12,38 @@ function CartModal(props) {
     props.SetCart(props.cart.slice(0,index).concat(props.cart.slice(index+1)))
   };
 
+  const history = useHistory();
+
   const checkout = () => {
-    alert('checkitout!')
+
+    // fetch('https://react-sushi-backend.herokuapp.com/menu_item', {
+    fetch('http://localhost:3000/checkouts', {
+      method: 'post',
+      mode: 'cors',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        items: props.cart,
+        name: 'thing'
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        debugger
+        // let categories = {}
+
+        // data.data.forEach(menuItem => {
+        //   if (categories[menuItem.attributes.category]){
+        //     categories[menuItem.attributes.category] = categories[menuItem.attributes.category].concat(menuItem)
+        //   } else {
+        //     categories[menuItem.attributes.category] = [menuItem]
+        //   }
+        // })
+        // props.SetData(categories);
+      });
+    history.push("/checkout");
   };
 
   return (
@@ -54,7 +85,7 @@ function CartModal(props) {
       <ModalFooter>
         <div className="footerContainer">
           <span className={(props.cart.length > 0 ? "resetModal" : "disabled") + " noselect footerButton"} onClick={() => {props.SetCart([])}}> Empty Cart </span>
-          <span className={(props.cart.length > 0 ? "checkout" : "disabled") + " noselect footerButton"} onClick={checkout}> Checkout </span>
+          <span className={(props.cart.length > 0 ? "checkout" : "disabled") + " noselect footerButton"} onClick={checkout}>Checkout(hidden)</span>
         </div>
       </ModalFooter>
     </Modal>
@@ -86,7 +117,7 @@ const ModalBody = styled.div`
     color: grey;
   }
   .cartItem{
-    padding: .5rem 1.2rem .5rem 1.2rem;
+    padding: .5rem 1.5rem .5rem 1.5rem;
     width: 100%;
     border-bottom: 0.6px solid grey;
     span{
@@ -148,6 +179,8 @@ const ModalFooter = styled.div`
       flex-direction: row;
       align-items: center;
       cursor: pointer;
+      text-decoration: none;
+      color: black;
     }
 
     .resetModal {
@@ -161,7 +194,7 @@ const ModalFooter = styled.div`
     .disabled {
       background-color: grey;
       pointer-events: none;
-      opacity: 70%;
+      opacity: 50%;
     }
   }
 `
