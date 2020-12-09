@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components'
 import { connect } from 'react-redux'; 
+import { useLocation } from "react-router-dom";
 
 
 function CheckoutPage(props) {
@@ -9,6 +10,8 @@ function CheckoutPage(props) {
   const [number, setNumber] = useState('');
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
+  const location = useLocation();
+  const data = location.state;
 
   return (
     <CheckoutPageContainer>
@@ -49,7 +52,7 @@ function CheckoutPage(props) {
       </form>
 
       <CartContainer>
-        {props.cart.map((item, index) => {
+        {data.cart.map((item, index) => {
           return (<div className="cartItem" key={index}>
                     <div className="itemInfo">
                       <div className="nameAndQuantity">
@@ -64,7 +67,7 @@ function CheckoutPage(props) {
                   </div>)
         })}
         <div>
-          <span>Total:</span>
+      <span>Total: ${data.price.toFixed(2)}</span>
           <span></span>
         </div>
 
@@ -153,6 +156,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const mapStateToProps = (state) => ({cart: state.cart.data});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage);
+export default connect(mapDispatchToProps)(CheckoutPage);

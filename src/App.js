@@ -23,7 +23,7 @@ function App(props) {
   useEffect(() => {
     // heroku server
     fetch('https://react-sushi-backend.herokuapp.com/menu_items', {
-    // fetch('http://localhost:3000/menu_item', {
+    // fetch('http://localhost:3000/menu_items', {
       method: 'get',
       mode: 'cors',
       headers: {
@@ -51,7 +51,7 @@ function App(props) {
         <div className={(show ? "active" : "hidden") + " header"}>
           <Link to="/"><span className="headerOption">Home</span></Link>
           <Link to="/menu"><span className="headerOption">Menu</span></Link>
-          <Link to="/checkout"><span className="headerOption">Checkout(hidden)</span></Link>
+          {/* <Link to="/checkout"><span className="headerOption">Checkout(hidden)</span></Link> */}
         </div>
       </HeaderContainer>
       <main>

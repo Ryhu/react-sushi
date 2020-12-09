@@ -16,8 +16,8 @@ function CartModal(props) {
 
   const checkout = () => {
 
-    // fetch('https://react-sushi-backend.herokuapp.com/menu_item', {
-    fetch('http://localhost:3000/checkouts', {
+    fetch('https://react-sushi-backend.herokuapp.com/checkouts', {
+    // fetch('http://localhost:3000/checkouts', {
       method: 'post',
       mode: 'cors',
       headers: {
@@ -31,19 +31,19 @@ function CartModal(props) {
     })
       .then(response => response.json())
       .then(data => {
-        debugger
-        // let categories = {}
 
-        // data.data.forEach(menuItem => {
-        //   if (categories[menuItem.attributes.category]){
-        //     categories[menuItem.attributes.category] = categories[menuItem.attributes.category].concat(menuItem)
-        //   } else {
-        //     categories[menuItem.attributes.category] = [menuItem]
-        //   }
-        // })
-        // props.SetData(categories);
+        let result = []
+        data.data.attributes.order_items.forEach(order_item => {
+          result.push({
+            name: order_item.data.attributes.menu_item.data.attributes.name,
+            price: order_item.data.attributes.menu_item.data.attributes.price,
+            quantity: order_item.data.attributes.quantity,
+            comments: order_item.data.attributes.comments,
+          })
+        })
+
+        history.push("/checkout", { cart: result, price: data.data.attributes.price });
       });
-    history.push("/checkout");
   };
 
   return (
@@ -56,8 +56,6 @@ function CartModal(props) {
         <FontAwesomeIcon icon={faTimes} onClick={props.handleClose}/>
         <Modal.Title>Cart</Modal.Title>
       </ModalHeader>
-      { console.log(props) }
-
       { props.cart.length > 0 ?
         <ModalBody>
           {props.cart.map((item, index) => {
@@ -85,7 +83,7 @@ function CartModal(props) {
       <ModalFooter>
         <div className="footerContainer">
           <span className={(props.cart.length > 0 ? "resetModal" : "disabled") + " noselect footerButton"} onClick={() => {props.SetCart([])}}> Empty Cart </span>
-          <span className={(props.cart.length > 0 ? "checkout" : "disabled") + " noselect footerButton"} onClick={checkout}>Checkout(hidden)</span>
+          <span className={(props.cart.length > 0 ? "checkout" : "disabled") + " noselect footerButton"} onClick={checkout}>Checkout</span>
         </div>
       </ModalFooter>
     </Modal>
