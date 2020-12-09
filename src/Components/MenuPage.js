@@ -25,42 +25,69 @@ function MenuPage(props) {
   
   return (
     <MenuPageContainer>
-    {/* <button onClick={() => console.log(props.data)}>hohohohoho</button> */}
-      <SideNav>
-        {
-          Object.keys(props.data).length > 1 &&
-            Object.keys(props.data).map(key => {
-              return <a className="sideNavButton" href={"#menuCategory" + key} key={key}>
-                { key }
-              </a>
-            })
-        }
-      </SideNav>
+      {/* sidenav and cart button */}
+      {
+        Object.keys(props.data).length > 1 &&
+        (<>
+            <SideNav>
+              { Object.keys(props.data).map(key => {
+                  return <a className="sideNavButton" href={"#menuCategory" + key} key={key}>
+                    { key }
+                  </a>
+              })}
+            </SideNav>
 
-      <CartButton>
-        <span className="fa-stack fa-2x" onClick={handleShowCartModal}>
-          <FontAwesomeIcon className="fa-stack-2x circle" icon={faCircle} />
-          <FontAwesomeIcon className="fa-stack-1x" icon={faShoppingCart} />
-        </span>
-      </CartButton>
+            <CartButton>
+              <span className="fa-stack fa-2x" onClick={handleShowCartModal}>
+                <FontAwesomeIcon className="fa-stack-2x circle" icon={faCircle} />
+                <FontAwesomeIcon className="fa-stack-1x" icon={faShoppingCart} />
+              </span>
+            </CartButton>
+        </>)
+      }
 
       {/* Modals */}
       { itemModalData && 
         <MenuItemModal data={itemModalData} show={showItemModal} handleClose={handleCloseItemModal}></MenuItemModal> }
-
       <CartModal show={showCartModal} handleClose={handleCloseCartModal}></CartModal> 
 
+
       <Body>
-        {
-          Object.keys(props.data).length > 1 &&
+        { Object.keys(props.data).length > 1 
+          ? 
             Object.keys(props.data).map(key => {
               return <MenuCategory data={props.data[key]} name={key} setItemModalData={handleShowItemModal} key={key} ></MenuCategory>
             })
+          : 
+            <Spinner>
+              <div class="spinner-border text-primary" role="status">
+              </div>
+              <p class="loading-text">The Heroku free server takes a while to load, please allow up to 30 seconds for the server to spin up...</p>
+            </Spinner>
         }
       </Body>
     </MenuPageContainer>
   );
 }
+
+const Spinner = styled.div`
+  height: calc(100vh - 10rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .spinner-border {
+    width: 15rem;
+    height: 15rem;
+    border-width: 1rem;
+  }
+
+  .loading-text {
+    margin-top: 1.2rem;
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+`
 
 const MenuPageContainer = styled.div`
 `
