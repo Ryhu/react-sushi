@@ -15,17 +15,21 @@ function CheckoutPage(props) {
 
   return (
     <CheckoutPageContainer>
-      <form>
-        contact and delivery information
+    <Body>
+      <DeliveryForm>
+        <h3 class="header">
+          Contact and Delivery
+        </h3>
+
+        <label>Name</label>
         <LineInput
           type='text'
           name="name"
           autocomplete="name"
-          placeholder="Name"
           value={name}
           onChange={(e) => {setName(e.target.value)}} 
         />
-        <LineInput
+        {/* <LineInput
           type='text'
           name="email"
           autocomplete="email"
@@ -48,8 +52,8 @@ function CheckoutPage(props) {
           placeholder="Address"
           value={address}
           onChange={(e) => {setAddress(e.target.value)}} 
-        />
-      </form>
+        /> */}
+      </DeliveryForm>
 
       <CartContainer>
         {data.cart.map((item, index) => {
@@ -66,18 +70,49 @@ function CheckoutPage(props) {
                     </div>
                   </div>)
         })}
-        <div>
-      <span>Total: ${data.price.toFixed(2)}</span>
-          <span></span>
-        </div>
 
+        <div className="footer">
+          <span className="subtotal">Subtotal: ${data.price.toFixed(2)}</span>
+          <span className="placeOrder">Place Order</span>
+        </div>
       </CartContainer>
+    </Body>
     </CheckoutPageContainer>
   );
 }
 
 //name, email, number, address
 // payment
+
+
+
+const Body = styled.form`
+  width: 80%;
+  margin: auto;
+
+`
+
+const DeliveryForm = styled.form`
+  width: 70%;
+  background-color: #F0F0F0;
+  padding: 1rem;
+  border-radius: 10px;
+  border:.5px solid grey;
+
+  .header {
+
+  }
+`
+
+const LineInput = styled.input`
+  border:1px solid grey;
+  font-size: 1.1rem;
+  width: 95%;
+  margin-bottom:20px;
+  padding: 0.2rem;
+  padding-left: 0.4rem;
+  border-radius:5px;
+`
 
 const CheckoutPageContainer = styled.div`
   width: 80vw;
@@ -86,7 +121,6 @@ const CheckoutPageContainer = styled.div`
 `
 
 const CartContainer = styled.div`
-  border-bottom: .6px solid grey;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,11 +129,34 @@ const CartContainer = styled.div`
     margin: 1.5rem;
     color: grey;
   }
+
+  .footer{
+    align-self: flex-end;
+    padding-right: 1.4rem;
+    padding-top: .6rem;
+    .subtotal{
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .placeOrder{
+      padding: .5rem .8rem .5rem .8rem;
+      height: 3rem;
+      border-radius: .5rem;
+      text-align: center;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background-color: #5cd65c;
+    }
+  }
+
   .cartItem{
-    padding: .5rem 1.2rem .5rem 1.2rem;
     width: 100%;
-    border-bottom: 0.6px solid grey;
-    padding: .5rem 1.5rem .5rem 1.5rem;
+    border-bottom: 0.6px solid #DCDCDC;
+    padding: .7rem 1.5rem .7rem 1.5rem;
     span{
       font-size: 1.3rem;
       text-align: center;
@@ -134,15 +191,6 @@ const CartContainer = styled.div`
       }
     }
   }
-`
-
-const LineInput = styled.input`
-  background-color:transparent;
-  border:1px solid #e6e600;
-  font-size: 1.1rem;
-  width: 95%;
-  margin-bottom:20px;
-  padding: 0.2rem;
 `
 
 const Whisper = styled.p`
