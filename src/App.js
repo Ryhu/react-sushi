@@ -51,7 +51,10 @@ function App(props) {
         <div className={(show ? "active" : "hidden") + " header"}>
           <Link to="/"><span className="headerOption">Home</span></Link>
           <Link to="/menu"><span className="headerOption">Menu</span></Link>
-          {/* <Link to="/checkout"><span className="headerOption">Checkout(hidden)</span></Link> */}
+          { props.checkout.length !== 0 && 
+            <Link to="/checkout"><span className="headerOption">Checkout</span></Link>
+          }
+
         </div>
       </HeaderContainer>
       <main>
@@ -100,4 +103,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(App);
+const mapStateToProps = (state) => ({
+  checkout: state.checkout.data,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+

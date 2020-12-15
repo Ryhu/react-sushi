@@ -179,10 +179,10 @@ const ModalFooter = styled.div`
 
 const mapDispatchToProps = dispatch => {
   return {
-    SetCart: (data) => dispatch({ type: 'SET_CART', data: data }),
+    SetCart: (data) => dispatch({ type: 'SET_CART', cart: data }),
   };
 };
 
-const mapStateToProps = (state) => ({cart: state.cart.data});
+const mapStateToProps = (state) => ({cart: state.cart.cart});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuItemModal);

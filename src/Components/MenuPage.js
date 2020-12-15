@@ -60,9 +60,9 @@ function MenuPage(props) {
             })
           : 
             <Spinner>
-              <div class="spinner-border text-primary" role="status">
+              <div className="spinner-border text-primary" role="status">
               </div>
-              <p class="loading-text">The Heroku free server takes a while to load, please allow up to 30 seconds for the server to spin up...</p>
+              <p className="loading-text">The Heroku free server takes a while to load, please allow up to 30 seconds for the server to spin up...</p>
             </Spinner>
         }
       </Body>

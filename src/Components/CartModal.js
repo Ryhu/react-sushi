@@ -41,6 +41,8 @@ function CartModal(props) {
             comments: order_item.data.attributes.comments,
           })
         })
+        props.SetCheckout(result)
+        props.SetSubtotal(data.data.attributes.price)
 
         history.push("/checkout", { cart: result, price: data.data.attributes.price });
       });
@@ -202,10 +204,15 @@ const ModalFooter = styled.div`
 const mapDispatchToProps = dispatch => {
   return {
     SetCart: (data) => dispatch({ type: 'SET_CART', data: data }),
+    SetCheckout: (data) => dispatch({ type: 'SET_CHECKOUT', data: data }),
+    SetSubtotal: (subtotal) => dispatch({ type: 'SET_SUBTOTAL', subtotal: subtotal }),
   };
 };
 
-const mapStateToProps = (state) => ({cart: state.cart.data});
+const mapStateToProps = (state) => ({
+  cart: state.cart.cart,
+  checkout: state.checkout,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartModal);
  

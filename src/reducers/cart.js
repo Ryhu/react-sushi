@@ -1,12 +1,12 @@
 
 const initialState = {
-  data: []
+  cart: []
 };
 
 export default function CartReducer(state = initialState, action) {
   switch (action.type) {
     case 'SET_CART': {
-      return { data: action.data };
+      return { cart: action.cart };
     }
     default:
       return state;

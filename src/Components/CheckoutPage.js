@@ -11,17 +11,17 @@ function CheckoutPage(props) {
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
   const location = useLocation();
-  const data = location.state;
+  const data = props.checkout;
 
   return (
     <CheckoutPageContainer>
     <Body>
       <DeliveryForm>
-        <h3 class="header">
+        <h3 className="header">
           Contact and Delivery
         </h3>
 
-        <label>Name</label>
+        <label className="label" >Name</label>
         <LineInput
           type='text'
           name="name"
@@ -29,34 +29,35 @@ function CheckoutPage(props) {
           value={name}
           onChange={(e) => {setName(e.target.value)}} 
         />
-        {/* <LineInput
+        <label className="label" >Email</label>
+        <LineInput
           type='text'
           name="email"
           autocomplete="email"
-          placeholder="Email"
           value={email}
           onChange={(e) => {setEmail(e.target.value)}} 
         />
+        <label className="label" >Phone</label>
         <LineInput
           type='text'
           name="number"
           autocomplete="number"
-          placeholder="Phone"
           value={number}
           onChange={(e) => {setNumber(e.target.value)}} 
         />
+        <label className="label" >Address</label>
         <LineInput
           type='text'
           name="address"
           autocomplete="address"
-          placeholder="Address"
           value={address}
           onChange={(e) => {setAddress(e.target.value)}} 
-        /> */}
+        />
       </DeliveryForm>
 
       <CartContainer>
-        {data.cart.map((item, index) => {
+        {props.checkout.map((item, index) => {
+          console.log(item)
           return (<div className="cartItem" key={index}>
                     <div className="itemInfo">
                       <div className="nameAndQuantity">
@@ -72,7 +73,7 @@ function CheckoutPage(props) {
         })}
 
         <div className="footer">
-          <span className="subtotal">Subtotal: ${data.price.toFixed(2)}</span>
+          <span className="subtotal">Subtotal: ${props.subtotal}</span>
           <span className="placeOrder">Place Order</span>
         </div>
       </CartContainer>
@@ -98,9 +99,17 @@ const DeliveryForm = styled.form`
   padding: 1rem;
   border-radius: 10px;
   border:.5px solid grey;
+  text-align: left;
+
 
   .header {
 
+  }
+
+  .label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.1rem;
   }
 `
 
@@ -108,10 +117,10 @@ const LineInput = styled.input`
   border:1px solid grey;
   font-size: 1.1rem;
   width: 95%;
-  margin-bottom:20px;
   padding: 0.2rem;
   padding-left: 0.4rem;
   border-radius:5px;
+  margin-bottom: .5rem;
 `
 
 const CheckoutPageContainer = styled.div`
@@ -201,7 +210,13 @@ const Whisper = styled.p`
 const mapDispatchToProps = dispatch => {
   return {
     SetCart: (data) => dispatch({ type: 'SET_CART', data: data }),
+    SetCheckout: (data) => dispatch({ type: 'SET_CHECKOUT', data: data }),
   };
 };
 
-export default connect(mapDispatchToProps)(CheckoutPage);
+const mapStateToProps = (state) => ({
+  checkout: state.checkout.data,
+  subtotal: state.checkout.subtotal
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage);
