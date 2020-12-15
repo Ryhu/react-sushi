@@ -82,7 +82,7 @@ function CheckoutPage(props) {
         })}
 
         <div className="footer">
-          <span className="subtotal">Subtotal: ${props.subtotal}</span>
+          <span className="subtotal">Subtotal: ${props.subtotal.toFixed(2)}</span>
           <span className="placeOrder">Place Order</span>
         </div>
       </CartContainer>

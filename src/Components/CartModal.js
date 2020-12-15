@@ -203,7 +203,7 @@ const ModalFooter = styled.div`
 
 const mapDispatchToProps = dispatch => {
   return {
-    SetCart: (data) => dispatch({ type: 'SET_CART', data: data }),
+    SetCart: (cart) => dispatch({ type: 'SET_CART', cart: cart }),
     SetCheckout: (data) => dispatch({ type: 'SET_CHECKOUT', data: data }),
     SetSubtotal: (subtotal) => dispatch({ type: 'SET_SUBTOTAL', subtotal: subtotal }),
   };
@@ -211,7 +211,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = (state) => ({
   cart: state.cart.cart,
-  checkout: state.checkout,
+  checkout: state.checkout.data,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartModal);
