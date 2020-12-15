@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components'
 import { connect } from 'react-redux'; 
 import { useLocation } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 
 function CheckoutPage(props) {
 
@@ -10,8 +10,17 @@ function CheckoutPage(props) {
   const [number, setNumber] = useState('');
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
-  const location = useLocation();
-  const data = props.checkout;
+  const history = useHistory();
+
+  const backToMenu = () => {
+    history.push("/menu");
+  }
+
+  useEffect(() => {
+    if(props.checkout.length <= 0){
+      history.push("/menu");
+    }
+  }, []);
 
   return (
     <CheckoutPageContainer>
@@ -87,10 +96,9 @@ function CheckoutPage(props) {
 
 
 
-const Body = styled.form`
+const Body = styled.div`
   width: 80%;
   margin: auto;
-
 `
 
 const DeliveryForm = styled.form`
