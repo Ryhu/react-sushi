@@ -65,6 +65,7 @@ function CheckoutPage(props) {
       </DeliveryForm>
 
       <CartContainer>
+        <h3>Your Order</h3>
         {props.checkout.map((item, index) => {
           console.log(item)
           return (<div className="cartItem" key={index}>
@@ -141,6 +142,11 @@ const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  h3{
+    margin-top: 1rem;
+  }
+
   .emptyMessage{
     font-size: 1.3rem;
     margin: 1.5rem;
@@ -167,6 +173,7 @@ const CartContainer = styled.div`
       justify-content: center;
       cursor: pointer;
       background-color: #5cd65c;
+      margin-top: .5rem;
     }
   }
 
@@ -199,6 +206,8 @@ const CartContainer = styled.div`
     }
 
     .itemComments{
+      text-align: left;
+      margin-left: .8rem;
       margin-top: -.2rem;
       padding-left: 2rem;
       span{
