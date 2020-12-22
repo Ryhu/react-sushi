@@ -49,11 +49,14 @@ function App(props) {
     <div className="App">
       <HeaderContainer>
         <div className={(show ? "active" : "hidden") + " header"}>
-          <Link to="/"><span className="headerOption">Home</span></Link>
-          <Link to="/menu"><span className="headerOption">Menu</span></Link>
-          { props.checkout.length !== 0 && 
-            <Link to="/checkout"><span className="headerOption">Checkout</span></Link>
-          }
+          <img src="http://hanaportwashington.com/images/logo.png" width="120" height="62"></img>
+          <div>
+            <Link to="/"><span className="headerOption">Home</span></Link>
+            <Link to="/menu"><span className="headerOption">Menu</span></Link>
+            { props.checkout.length !== 0 && 
+              <Link to="/checkout"><span className="headerOption">Checkout</span></Link>
+            }
+          </div>
 
         </div>
       </HeaderContainer>
@@ -69,14 +72,18 @@ function App(props) {
 }
 
 const HeaderContainer = styled.div`
-  padding-top: 4rem;
+  padding-top: 6rem;
   .header{
-    background-color: blue;
+    z-index: 100;
+    background-color: #262626;
     padding: 1rem;
     position: fixed;
     top: 0;
     width: 100%;
-    display: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
     transition: top 0.3s;
     
     .headerOption {
