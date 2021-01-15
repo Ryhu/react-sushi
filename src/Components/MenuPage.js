@@ -71,7 +71,7 @@ function MenuPage(props) {
 }
 
 const Spinner = styled.div`
-  height: calc(100vh - 10rem);
+  height: calc(100vh);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -86,6 +86,7 @@ const Spinner = styled.div`
     margin-top: 1.2rem;
     font-weight: 600;
     font-size: 1.3rem;
+    color: white;
   }
 `
 

@@ -21,20 +21,17 @@ function MenuCategory(props) {
 }
 
 const MenuCategoryContainer = styled.div`
-  background-image: url("./wood2.1.jpg");
-  margin-top: 3rem;
+  background-image: url("./wax_wood.jpg");
+  border-radius: 7px;
+  background-size: cover;
+  box-shadow: 6px 5px 5px #111111;
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   .categoryTitle{
     font-size: 2rem;
     font-weight: bold;
-    color: white;
-  }
-  .categoryTitle::before { 
-    display: block; 
-    content: " "; 
-    margin-top: -5.5rem; 
-    height: 5.5rem; 
-    visibility: hidden; 
-    pointer-events: none;
+    opacity: .9;
   }
 `
 
